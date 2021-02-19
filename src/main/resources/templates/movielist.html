@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Spring MVC</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body bgcolor="#E6E6FA">
+
+    <table border="1">
+        <tr>
+            <th>ImdbId</th>
+            <th>Title</th>
+            <th>Plot</th>
+            <th>Year</th>
+            <th>PosterURL</th>
+            <th>AwardWins</th>
+            <th>AwardNominations</th>
+            <th>TomatoMeter</th>
+        </tr>
+
+        <tr th:each="movie : ${list}">
+            <td th:utext="${movie.getImdbId()}">ImdbId</td>
+            <td th:utext="${movie.getTitle()}">Title</td>
+            <td th:utext="${movie.getPlot()}">Plot</td>
+            <td th:utext="${movie.getYear()}">Year</td>
+            <td th:utext="${movie.getPosterURL()}">PosterURL</td>
+            <td th:utext="${movie.getAwardWins()}">AwardWins</td>
+            <td th:utext="${movie.getAwardNominations()}">AwardNominations</td>
+            <td th:utext="${movie.getTomatoMeter()}">TomatoMeter</td>
+        </tr>
+    </table>
+</body>
+</html>

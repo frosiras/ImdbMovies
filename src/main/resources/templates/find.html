@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body>
+<th:block th:if="${addMovieToFavoriteById}">
+<form th:action="@{/addMovieToFavoriteById}" th:object="${movie}" method="post">
+    <p>ID: <input type="text" th:field="*{imdbId}"/></p>
+    <p><input type="submit" value="Submit"/></p>
+</form>
+</th:block>
+
+<th:block th:if="${addMovieToFavoriteByName}">
+    <form th:action="@{/addMovieToFavoriteByName}" th:object="${movie}" method="post">
+        <p>Name: <input type="text" th:field="*{title}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</th:block>
+
+<th:block th:if="${getFavoriteFilmsWithActor}">
+    <form th:action="@{/getFavoriteFilmsWithActor}" th:object="${actor}" method="post">
+        <p>firstName: <input type="text" th:field="*{firstName}"/></p>
+        <p>lastName: <input type="text" th:field="*{lastName}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</th:block>
+
+<th:block th:if="${removeMovieFromFavorite}">
+    <form th:action="@{/removeMovieFromFavorite}" th:object="${movie}" method="post">
+        <p>imdbId: <input type="text" th:field="*{imdbId}"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
+</th:block>
+
+</body>
+</html>
