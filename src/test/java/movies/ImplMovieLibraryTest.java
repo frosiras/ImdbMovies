@@ -1,25 +1,32 @@
 package movies;
 
 import movies.exception.MovieNotFoundException;
-import org.junit.BeforeClass;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
 import movies.models.MovieEntity;
 import movies.services.ImplMovieLibrary;
 import movies.services.MovieLibrary;
+import org.junit.BeforeClass;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ImplMovieLibraryTest {
     private static MovieLibrary library;
     private static MovieEntity mov1 = new MovieEntity();
     private static MovieEntity mov2 = new MovieEntity();
+
+    {
+        try {
+            setUp();
+        } catch (MovieNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
     @BeforeClass
     public static void setUp() throws MovieNotFoundException {
         ApplicationContext ctx = new ClassPathXmlApplicationContext("bean.xml");
@@ -54,13 +61,7 @@ public class ImplMovieLibraryTest {
         library.addMovieToFavoriteById("tt0088247");
         library.addMovieToFavoriteById("tt0103064");
     }
-    {
-        try {
-            setUp();
-        } catch (MovieNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
+
     @DisplayName("Test 1 ImplMovieLibrary.getMovieById()")
     @Test
     void testGetMovieById1() throws MovieNotFoundException {
@@ -89,7 +90,7 @@ public class ImplMovieLibraryTest {
     @Test
     void testRemoveMovieFromFavorite() throws Exception {
         library.removeMovieFromFavorite("tt0103064");
-        assertEquals(3,library.getFavoriteFilmsWithActor("Arnold Schwarzenegger").size());
+        assertEquals(3, library.getFavoriteFilmsWithActor("Arnold Schwarzenegger").size());
         library.addMovieToFavoriteById("tt0103064");
     }
 

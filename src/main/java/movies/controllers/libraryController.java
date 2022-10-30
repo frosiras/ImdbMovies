@@ -3,17 +3,18 @@ package movies.controllers;
 import movies.exception.MovieNotFoundException;
 import movies.models.ActorEntity;
 import movies.models.MovieEntity;
+import movies.services.MovieLibrary;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import movies.services.MovieLibrary;
 
 
 @Controller
 public class libraryController {
     MovieLibrary movieLibrary;
-    private static void setModel(Model model, MovieEntity movie){
+
+    private static void setModel(Model model, MovieEntity movie) {
         model.addAttribute("title", movie.getTitle());
         model.addAttribute("id", movie.getImdbId());
         model.addAttribute("year", movie.getYear());
@@ -39,30 +40,30 @@ public class libraryController {
     }
 
     // DONE
-    @RequestMapping(value="/getRandomMovie", method = RequestMethod.GET)
-    public String getRandom(Model model){
+    @RequestMapping(value = "/getRandomMovie", method = RequestMethod.GET)
+    public String getRandom(Model model) {
         MovieEntity movie = movieLibrary.getRandomMovie();
         setModel(model, movie);
         return "movie.html";
     }
 
     // DONE
-    @RequestMapping(value="getFavoriteFilms", method = RequestMethod.GET)
+    @RequestMapping(value = "getFavoriteFilms", method = RequestMethod.GET)
     public String getFavoriteFilms(Model model) throws MovieNotFoundException {
         model.addAttribute("list", movieLibrary.getFavoriteFilms());
         return "movielist";
     }
 
     // DONE
-    @RequestMapping(value="findMoviesByName", method = RequestMethod.GET)
+    @RequestMapping(value = "findMoviesByName", method = RequestMethod.GET)
     public String findMoviesByName(@RequestParam String movieName, Model model) throws MovieNotFoundException {
         model.addAttribute("list", movieLibrary.findMoviesByName(movieName));
         return "movielist";
     }
 
     // DONE
-    @RequestMapping(value="addMovieToFavoriteByName", method = RequestMethod.GET)
-    public String findMovieToFavoriteByName(Model model){
+    @RequestMapping(value = "addMovieToFavoriteByName", method = RequestMethod.GET)
+    public String findMovieToFavoriteByName(Model model) {
         model.addAttribute("movie", new MovieEntity());
         model.addAttribute("addMovieToFavoriteByName", true);
         return "find";
@@ -77,8 +78,8 @@ public class libraryController {
     }
 
     // DONE
-    @RequestMapping(value="addMovieToFavoriteById", method = RequestMethod.GET)
-    public String addMovieToFavoriteById(Model model){
+    @RequestMapping(value = "addMovieToFavoriteById", method = RequestMethod.GET)
+    public String addMovieToFavoriteById(Model model) {
         model.addAttribute("movie", new MovieEntity());
         model.addAttribute("addMovieToFavoriteById", true);
         return "find";
@@ -93,8 +94,8 @@ public class libraryController {
     }
 
     // DONE
-    @RequestMapping(value="getFavoriteFilmsWithActor", method = RequestMethod.GET)
-    public String getFavoriteFilmsWithActor(Model model){
+    @RequestMapping(value = "getFavoriteFilmsWithActor", method = RequestMethod.GET)
+    public String getFavoriteFilmsWithActor(Model model) {
         model.addAttribute("actor", new ActorEntity());
         model.addAttribute("getFavoriteFilmsWithActor", true);
         return "find";
@@ -102,14 +103,14 @@ public class libraryController {
 
     // DONE
     @PostMapping("getFavoriteFilmsWithActor")
-    public String getFavoriteFilmsWithActor(@ModelAttribute("actor") ActorEntity actor, Model model){
+    public String getFavoriteFilmsWithActor(@ModelAttribute("actor") ActorEntity actor, Model model) {
         model.addAttribute("list", movieLibrary.getFavoriteFilmsWithActor(actor.getFullName()));
         return "movielist";
     }
 
     // DONE
-    @RequestMapping(value="removeMovieFromFavorite", method = RequestMethod.GET)
-    public String removeMovieFromFavorite(Model model){
+    @RequestMapping(value = "removeMovieFromFavorite", method = RequestMethod.GET)
+    public String removeMovieFromFavorite(Model model) {
         model.addAttribute("movie", new MovieEntity());
         model.addAttribute("removeMovieFromFavorite", true);
         return "find";

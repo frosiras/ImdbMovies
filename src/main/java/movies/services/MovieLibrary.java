@@ -11,6 +11,7 @@ public interface MovieLibrary {
 
     /**
      * Finds movies using by part of its name
+     *
      * @param movieName - search string
      * @return list of found movies
      */
@@ -18,6 +19,7 @@ public interface MovieLibrary {
 
     /**
      * Loads movie by its imdb id
+     *
      * @param imdbId - id of movie
      * @return movie information
      */
@@ -25,6 +27,7 @@ public interface MovieLibrary {
 
     /**
      * Adds film in personal collection by full movie name
+     *
      * @param movieName - name of movie
      * @return true if this film was already in collection, false - otherwise
      */
@@ -32,6 +35,7 @@ public interface MovieLibrary {
 
     /**
      * Adds film in personal collection by imdb id
+     *
      * @param imdbId - id of film
      * @return true if this film was already in collection, false - otherwise
      */
@@ -45,13 +49,17 @@ public interface MovieLibrary {
 
     /**
      * Gets films from personal collections which have specified actor
+     *
      * @param fullName - first and second name of actor
      * @return list of movies
      */
-    List <MovieEntity> getFavoriteFilmsWithActor(String fullName);
-    List <MovieEntity> getFavoriteFilmsWithActor(String fullName1, String fullName2);
+    List<MovieEntity> getFavoriteFilmsWithActor(String fullName);
+
+    List<MovieEntity> getFavoriteFilmsWithActor(String fullName1, String fullName2);
+
     /**
      * Removes film from collection of favorite movies
+     *
      * @param imdbId - id of deleted movie
      */
     void removeMovieFromFavorite(String imdbId) throws MovieNotFoundException;
@@ -59,6 +67,7 @@ public interface MovieLibrary {
 
     /**
      * Loads random movie from movie database
+     *
      * @return movie information
      */
     MovieEntity getRandomMovie();

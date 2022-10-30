@@ -2,7 +2,6 @@ package movies;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,6 +13,7 @@ public class AnnotatedMovies {
     public static void main(String[] args) {
         SpringApplication.run(AnnotatedMovies.class, args);
     }
+
     @RequestMapping(value = "/", method = RequestMethod.GET)
     @ResponseBody
     public String helloWorld() {

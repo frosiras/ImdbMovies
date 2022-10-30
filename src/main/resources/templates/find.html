@@ -6,30 +6,30 @@
 </head>
 <body>
 <th:block th:if="${addMovieToFavoriteById}">
-<form th:action="@{/addMovieToFavoriteById}" th:object="${movie}" method="post">
-    <p>ID: <input type="text" th:field="*{imdbId}"/></p>
-    <p><input type="submit" value="Submit"/></p>
-</form>
+    <form method="post" th:action="@{/addMovieToFavoriteById}" th:object="${movie}">
+        <p>ID: <input th:field="*{imdbId}" type="text"/></p>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
 </th:block>
 
 <th:block th:if="${addMovieToFavoriteByName}">
-    <form th:action="@{/addMovieToFavoriteByName}" th:object="${movie}" method="post">
-        <p>Name: <input type="text" th:field="*{title}"/></p>
+    <form method="post" th:action="@{/addMovieToFavoriteByName}" th:object="${movie}">
+        <p>Name: <input th:field="*{title}" type="text"/></p>
         <p><input type="submit" value="Submit"/></p>
     </form>
 </th:block>
 
 <th:block th:if="${getFavoriteFilmsWithActor}">
-    <form th:action="@{/getFavoriteFilmsWithActor}" th:object="${actor}" method="post">
-        <p>firstName: <input type="text" th:field="*{firstName}"/></p>
-        <p>lastName: <input type="text" th:field="*{lastName}"/></p>
+    <form method="post" th:action="@{/getFavoriteFilmsWithActor}" th:object="${actor}">
+        <p>firstName: <input th:field="*{firstName}" type="text"/></p>
+        <p>lastName: <input th:field="*{lastName}" type="text"/></p>
         <p><input type="submit" value="Submit"/></p>
     </form>
 </th:block>
 
 <th:block th:if="${removeMovieFromFavorite}">
-    <form th:action="@{/removeMovieFromFavorite}" th:object="${movie}" method="post">
-        <p>imdbId: <input type="text" th:field="*{imdbId}"/></p>
+    <form method="post" th:action="@{/removeMovieFromFavorite}" th:object="${movie}">
+        <p>imdbId: <input th:field="*{imdbId}" type="text"/></p>
         <p><input type="submit" value="Submit"/></p>
     </form>
 </th:block>

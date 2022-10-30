@@ -9,8 +9,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class FormatQuery {
-    private static Logger logger = Logger.getLogger("MovieLibrary");
     private static final String startAPI = "http://www.omdbapi.com/?apikey=d3b8c0ed&r=json&";
+    private static Logger logger = Logger.getLogger("MovieLibrary");
+
     public static String getJSONfromURL(String option) throws IOException {
         URL url;
         try {
@@ -23,7 +24,7 @@ public class FormatQuery {
             logger.debug("json from getJSONfromURL - " + json);
             in.close();
             return json;
-        } catch (IOException e){
+        } catch (IOException e) {
             logger.error(e);
             throw e;
         }

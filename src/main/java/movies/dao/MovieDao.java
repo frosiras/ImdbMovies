@@ -1,13 +1,13 @@
 package movies.dao;
 
 import movies.models.ActorEntity;
+import movies.models.MovieEntity;
+import movies.utils.Connection;
 import org.apache.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import org.springframework.stereotype.Component;
-import movies.models.MovieEntity;
-import movies.utils.Connection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @Component
 public class MovieDao {
     private static Logger logger = Logger.getLogger("MovieLibrary");
+
     public void save(MovieEntity movie) throws Exception {
         Session session = Connection.getSessionFactory().openSession();
         Transaction tx = session.beginTransaction();
@@ -26,7 +27,9 @@ public class MovieDao {
                 if (actorDao.findAllFilmsByFullName(actorEntity).size() == 0)
                     newActors.add(actorEntity);
                 else newActors.add(actorDao.findByFullName(actorEntity).get(0));
-            } catch (Exception e) { logger.error(e); }
+            } catch (Exception e) {
+                logger.error(e);
+            }
         });
         movie.setActors(newActors);
         session.save(movie);
@@ -53,6 +56,7 @@ public class MovieDao {
         session.close();
         return movie;
     }
+
     public List<MovieEntity> getAllMovies() throws Exception {
         List<MovieEntity> list;
         Session session = Connection.getSessionFactory().openSession();
@@ -61,6 +65,7 @@ public class MovieDao {
         session.close();
         return list;
     }
+
     public List<ActorEntity> getActors(String id) throws Exception {
         Session session = Connection.getSessionFactory().openSession();
         Query query = session.createQuery("select actors FROM MovieEntity mov where mov.id = :id");
